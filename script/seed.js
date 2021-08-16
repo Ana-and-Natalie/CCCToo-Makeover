@@ -1,7 +1,14 @@
 'use strict'
 const {green, red} = require('chalk')
 const db = require('../server/db')
-const {User, Month, Week, Day} = require('../server/db/models')
+const {
+  User,
+  Month,
+  Week,
+  Day,
+  Staff,
+  Announcement
+} = require('../server/db/models')
 
 const seed = async () => {
   try {
@@ -101,6 +108,40 @@ const seed = async () => {
 
     await Day.bulkCreate(days, {returning: true})
     console.log(green('Seeded days'))
+
+    const staff = [
+      {
+        fullName: 'Debbie Minette',
+        position: 'Director',
+        bio:
+          ' has been with C.C.C. For 43 years. She and her husband Tony live in Frankfort. They have three children Tony, Anna, and Aimee. Mrs. Debbie has earned her degree in Early Childhood Education. She graduated with honors with an Associate in Arts Degree. She holds a current certificate in Red Cross First Aid and CPR.'
+      },
+      {
+        fullName: 'Kelly Drummond',
+        position: 'Teacher',
+        bio:
+          'is our  4-year-old teacher and has been with our staff 32 years. She started in June of 1986. Mrs. Kelly is the assistant Director. She received her CDA and attended Moraine Valley Community College. Mrs. Kelly resides in Frankfort with her husband Dan, their daughter Jennifer, and son Ian. Mrs. Kelly holds a current certificate in First Aid and CPR.',
+        class: 'Preschool/Kinderbridge'
+      },
+      {
+        fullName: 'Erin Niemeyer',
+        position: 'Teacher',
+        bio:
+          'is the Lead Teacher in the Infant room. She attended Joliet Junior College and has earned her associates degree in Early Childhood education. She has been with us for 10 years. Mrs. Erin lives in New Lenox with her husband. She Volunteers in the nursery at her church. Mrs. Erin is CPR and first aid certified.',
+        class: 'Infant Room'
+      }
+    ]
+    await Staff.bulkCreate(staff, {returning: true})
+    console.log(green('Seeded staff'))
+
+    const announcements = [
+      {
+        description:
+          'We are starting our early bird registration for the 2021-2022 school year during the month of February. The early bird registration fee is $50.00 for the first child and $25.00 for the second. Normally, our fee is $65.00.'
+      }
+    ]
+    await Announcement.bulkCreate(announcements, {returning: true})
+    console.log(green('Seeded announcements'))
   } catch (err) {
     console.log(red(err))
   }

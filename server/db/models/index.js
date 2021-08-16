@@ -2,6 +2,8 @@ const User = require('./user')
 const Month = require('./month')
 const Week = require('./week')
 const Day = require('./day')
+const Announcement = require('./announcement')
+const Staff = require('./staff')
 
 /**
  * If we had any associations to make, this would be a great place to put them!
@@ -28,5 +30,7 @@ module.exports = {
   User,
   Month,
   Week,
-  Day
+  Day,
+  Announcement,
+  Staff
 }
